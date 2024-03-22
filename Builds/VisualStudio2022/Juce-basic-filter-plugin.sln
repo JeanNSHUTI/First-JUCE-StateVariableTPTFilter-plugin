@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 17
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Juce-basic-filter-plugin - VST3", "Juce-basic-filter-plugin_VST3.vcxproj", "{40818003-0DAC-65F3-DC78-27698BC5E927}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A53D5953-7544-E610-1FD3-85DF39448EC3} = {A53D5953-7544-E610-1FD3-85DF39448EC3}
+		{435F72BD-42FB-A1CD-019C-8CA1C04D0CCE} = {435F72BD-42FB-A1CD-019C-8CA1C04D0CCE}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Juce-basic-filter-plugin - Shared Code", "Juce-basic-filter-plugin_SharedCode.vcxproj", "{A53D5953-7544-E610-1FD3-85DF39448EC3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Juce-basic-filter-plugin - VST3 Manifest Helper", "Juce-basic-filter-plugin_VST3ManifestHelper.vcxproj", "{435F72BD-42FB-A1CD-019C-8CA1C04D0CCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40818003-0DAC-65F3-DC78-27698BC5E927}.Debug|x64.ActiveCfg = Debug|x64
+		{40818003-0DAC-65F3-DC78-27698BC5E927}.Debug|x64.Build.0 = Debug|x64
+		{40818003-0DAC-65F3-DC78-27698BC5E927}.Release|x64.ActiveCfg = Release|x64
+		{40818003-0DAC-65F3-DC78-27698BC5E927}.Release|x64.Build.0 = Release|x64
+		{A53D5953-7544-E610-1FD3-85DF39448EC3}.Debug|x64.ActiveCfg = Debug|x64
+		{A53D5953-7544-E610-1FD3-85DF39448EC3}.Debug|x64.Build.0 = Debug|x64
+		{A53D5953-7544-E610-1FD3-85DF39448EC3}.Release|x64.ActiveCfg = Release|x64
+		{A53D5953-7544-E610-1FD3-85DF39448EC3}.Release|x64.Build.0 = Release|x64
+		{435F72BD-42FB-A1CD-019C-8CA1C04D0CCE}.Debug|x64.ActiveCfg = Debug|x64
+		{435F72BD-42FB-A1CD-019C-8CA1C04D0CCE}.Debug|x64.Build.0 = Debug|x64
+		{435F72BD-42FB-A1CD-019C-8CA1C04D0CCE}.Release|x64.ActiveCfg = Release|x64
+		{435F72BD-42FB-A1CD-019C-8CA1C04D0CCE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
