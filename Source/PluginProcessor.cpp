@@ -8,21 +8,24 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <math.h>
 
 //==============================================================================
 JucebasicfilterpluginAudioProcessor::JucebasicfilterpluginAudioProcessor()
-    : myValueTreeState(*this, nullptr, juce::Identifier("myParamaters"), 
+    : myValueTreeState(*this, nullptr, juce::Identifier("myParamaters"),
         {
             std::make_unique<juce::AudioParameterInt>("cutoff", "CUTOFF", 20, 20000, 1000),
             std::make_unique<juce::AudioParameterFloat>("resonance", "RES", 0.707f, 10.0f, 2.66f),
             std::make_unique<juce::AudioParameterChoice>("type", "TYPE", juce::StringArray{"LowPass", "HighPass", "BandPass"}, 2),
-            std::make_unique<juce::AudioParameterBool>("bypass", "BYPASS", 0)
+            std::make_unique<juce::AudioParameterBool>("bypass", "BYPASS", 0),
+            std::make_unique<juce::AudioParameterFloat>("lfoDepth", "LFO DEPTH", 0.0f, 1.0f, 0.0f)
         })
 {
     myCutoffptr = dynamic_cast<juce::AudioParameterInt*>(myValueTreeState.getParameter("cutoff"));
     myResonanceptr = dynamic_cast<juce::AudioParameterFloat*>(myValueTreeState.getParameter("resonance"));
     myTypeptr = dynamic_cast<juce::AudioParameterChoice*>(myValueTreeState.getParameter("type"));
     myBypassptr = dynamic_cast<juce::AudioParameterBool*>(myValueTreeState.getParameter("bypass"));
+    lfoDepthptr = dynamic_cast<juce::AudioParameterFloat*>(myValueTreeState.getParameter("lfoDepth"));
 }
 
 JucebasicfilterpluginAudioProcessor::~JucebasicfilterpluginAudioProcessor()
@@ -136,8 +139,15 @@ bool JucebasicfilterpluginAudioProcessor::isBusesLayoutSupported (const BusesLay
 
 void JucebasicfilterpluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    myPlayheadptr = this->getPlayHead();
+    myPlayheadptr->getCurrentPosition(myHostTiming);
+    mySongPosition = myHostTiming.ppqPosition;      //pulses (as figures-fractions) per quarternotes
 
-    myFirstJuceFilter.setCutoffFrequency(myCutoffptr->get());
+    myLfoPhase = std::fmod(mySongPosition, 1);
+
+    myFilterFrequency = myCutoffptr->get() + (myCutoffptr->get() * (myLfoPhase * lfoDepthptr->get()));
+
+    myFirstJuceFilter.setCutoffFrequency(myFilterFrequency);
     myFirstJuceFilter.setResonance(myResonanceptr->get());
     myFirstJuceFilter.setType(getFilterType());
 
@@ -164,15 +174,18 @@ juce::AudioProcessorEditor* JucebasicfilterpluginAudioProcessor::createEditor()
 //==============================================================================
 void JucebasicfilterpluginAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    auto state = myValueTreeState.copyState();
+    std::unique_ptr<juce::XmlElement>xml(state.createXml());
+    copyXmlToBinary(*xml, destData);
 }
 
 void JucebasicfilterpluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    std::unique_ptr<juce::XmlElement>xmlState(getXmlFromBinary(data, sizeInBytes));
+
+    if (xmlState.get() != nullptr)
+        if (xmlState->hasTagName(myValueTreeState.state.getType()))
+            myValueTreeState.replaceState(juce::ValueTree::fromXml(*xmlState));
 }
 
 juce::dsp::StateVariableTPTFilterType JucebasicfilterpluginAudioProcessor:: getFilterType()

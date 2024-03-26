@@ -26,6 +26,7 @@ public:
     juce::AudioParameterFloat* myResonanceptr;
     juce::AudioParameterChoice* myTypeptr;
     juce::AudioParameterBool* myBypassptr;
+    juce::AudioParameterFloat* lfoDepthptr;
 
     //==============================================================================
     JucebasicfilterpluginAudioProcessor();
@@ -68,6 +69,14 @@ private:
     //==============================================================================
     juce::dsp::StateVariableTPTFilter<float> myFirstJuceFilter;
     juce::dsp::ProcessSpec processSpec;
+
+
+    juce::AudioPlayHead* myPlayheadptr;
+    juce::AudioPlayHead::CurrentPositionInfo myHostTiming;
+    std::atomic<float> mySongPosition;
+    std::atomic<float> myLfoPhase;
+    std::atomic<float> myFilterFrequency;
+
 
     //==============================================================================
     juce::dsp::StateVariableTPTFilterType getFilterType();
