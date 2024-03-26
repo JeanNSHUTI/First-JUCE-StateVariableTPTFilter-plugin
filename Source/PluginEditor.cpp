@@ -13,9 +13,44 @@
 JucebasicfilterpluginAudioProcessorEditor::JucebasicfilterpluginAudioProcessorEditor (JucebasicfilterpluginAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
     setSize (400, 300);
+
+    addAndMakeVisible(myCutoffSlider);
+    myCutoffSlider.setSliderStyle(juce::Slider::LinearHorizontal);
+
+    myCutoffSliderAttachmentptr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.myValueTreeState, "cutoff", myCutoffSlider));
+    addAndMakeVisible(myCutoffLabel);
+    myCutoffLabel.attachToComponent(&myCutoffSlider, false);
+
+    addAndMakeVisible(myResonanceSlider);
+    myResonanceSlider.setSliderStyle(juce::Slider::LinearVertical);
+    myResonanceSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+
+    myResonanceSliderAttachmentptr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.myValueTreeState, "resonance", myResonanceSlider));
+    addAndMakeVisible(myResonanceLabel);
+    myResonanceLabel.attachToComponent(&myResonanceSlider, false);
+
+    addAndMakeVisible(myLfoDepthSlider);
+    myLfoDepthSlider.setSliderStyle(juce::Slider::Rotary);
+    myLfoDepthSlider.setTextBoxStyle(juce::Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
+
+    myLfoDepthSliderAttachmentptr.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(audioProcessor.myValueTreeState, "lfoDepth", myLfoDepthSlider));
+    addAndMakeVisible(myLfoDepthLabel);
+    myLfoDepthLabel.attachToComponent(&myLfoDepthSlider, true);
+
+    addAndMakeVisible(myTypeComboBox);
+    myTypeComboBox.addItem("LowPass", 1);
+    myTypeComboBox.addItem("HighPass", 2);
+    myTypeComboBox.addItem("BandPass", 3);
+
+    myTypeComboBoxAttachmentptr.reset(new juce::AudioProcessorValueTreeState::ComboBoxAttachment(audioProcessor.myValueTreeState, "type", myTypeComboBox));
+
+    addAndMakeVisible(myBypassToggleButton);
+
+    myToggleButtonAttachmentptr.reset(new juce::AudioProcessorValueTreeState::ButtonAttachment(audioProcessor.myValueTreeState, "bypass", myBypassToggleButton));
+
+    addAndMakeVisible(myTitleLabel);
+
 }
 
 JucebasicfilterpluginAudioProcessorEditor::~JucebasicfilterpluginAudioProcessorEditor()
@@ -30,11 +65,15 @@ void JucebasicfilterpluginAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    //g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void JucebasicfilterpluginAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    myCutoffSlider.setBounds(50, 50, 350, 50);
+    myResonanceSlider.setBounds(0, 50, 50, 150);
+    myTypeComboBox.setBounds(50, 100, 100, 50);
+    myBypassToggleButton.setBounds(50, 150, 200, 50);
+    myLfoDepthSlider.setBounds(50, 200, 100, 100);
+    myTitleLabel.setBounds(200, 0, 100, 50);
 }

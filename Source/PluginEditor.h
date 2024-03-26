@@ -29,5 +29,22 @@ private:
     // access the processor object that created it.
     JucebasicfilterpluginAudioProcessor& audioProcessor;
 
+    juce::Slider myCutoffSlider;
+    juce::Slider myResonanceSlider;
+    juce::Slider myLfoDepthSlider;
+    juce::ComboBox myTypeComboBox;
+    juce::ToggleButton myBypassToggleButton{"BYPASS"};
+
+    juce::Label myResonanceLabel{ {}, "RES"};
+    juce::Label myCutoffLabel{ {}, "FREQ"};
+    juce::Label myTitleLabel{ {}, "FILTER"};
+    juce::Label myLfoDepthLabel{ {}, "LFO DEPTH"};
+
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> myCutoffSliderAttachmentptr;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> myResonanceSliderAttachmentptr;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> myLfoDepthSliderAttachmentptr;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> myTypeComboBoxAttachmentptr;
+    std::unique_ptr < juce::AudioProcessorValueTreeState::ButtonAttachment> myToggleButtonAttachmentptr;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JucebasicfilterpluginAudioProcessorEditor)
 };
