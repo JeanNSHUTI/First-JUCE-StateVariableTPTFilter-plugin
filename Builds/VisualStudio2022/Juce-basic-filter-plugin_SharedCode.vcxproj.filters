@@ -625,6 +625,9 @@
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
       <Filter>Juce-basic-filter-plugin\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MyLookAndFeel.cpp">
+      <Filter>Juce-basic-filter-plugin</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>
     </ClCompile>
@@ -3167,6 +3170,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
       <Filter>Juce-basic-filter-plugin\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MyLookAndFeel.h">
+      <Filter>Juce-basic-filter-plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>

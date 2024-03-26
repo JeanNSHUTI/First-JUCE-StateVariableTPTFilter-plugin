@@ -109,7 +109,8 @@ if not exist &quot;$(OutDir)\\Juce-basic-filter-plugin.vst3\Contents\x86_64-win\
       <Command>copy /Y &quot;$(OutDir)\Juce-basic-filter-plugin.dll&quot; &quot;$(OutDir)\Juce-basic-filter-plugin.vst3\Contents\x86_64-win\Juce-basic-filter-plugin.vst3&quot;
 del /s /q &quot;$(OutDir)/Juce-basic-filter-plugin.vst3\Contents\moduleinfo.json&quot;
 if not exist &quot;$(OutDir)/Juce-basic-filter-plugin.vst3\Contents\Resources\&quot; del /s /q &quot;$(OutDir)/Juce-basic-filter-plugin.vst3\Contents\Resources&quot; &amp;&amp; mkdir &quot;$(OutDir)/Juce-basic-filter-plugin.vst3\Contents\Resources&quot;
-&quot;$(SolutionDir)$(Platform)\$(Configuration)\VST3 Manifest Helper\juce_vst3_helper.exe&quot; -create -version &quot;1.0.0&quot; -path &quot;$(OutDir)/Juce-basic-filter-plugin.vst3&quot; -output &quot;$(OutDir)/Juce-basic-filter-plugin.vst3\Contents\Resources\moduleinfo.json&quot;</Command>
+&quot;$(SolutionDir)$(Platform)\$(Configuration)\VST3 Manifest Helper\juce_vst3_helper.exe&quot; -create -version &quot;1.0.0&quot; -path &quot;$(OutDir)/Juce-basic-filter-plugin.vst3&quot; -output &quot;$(OutDir)/Juce-basic-filter-plugin.vst3\Contents\Resources\moduleinfo.json&quot;
+xcopy /E /H /K /R /Y /I &quot;$(OutDir)\Juce-basic-filter-plugin.vst3&quot; &quot;C:\Program Files\Common Files\VST3\Juce-basic-filter-plugin.vst3\&quot;</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
