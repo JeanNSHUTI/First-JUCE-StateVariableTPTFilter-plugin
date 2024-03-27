@@ -87,10 +87,10 @@ void JucebasicfilterpluginAudioProcessorEditor::paint (juce::Graphics& g)
 
 void JucebasicfilterpluginAudioProcessorEditor::resized()
 {
-    myCutoffSlider.setBounds(50, 50, 350, 50);
-    myResonanceSlider.setBounds(0, 50, 50, 150);
-    myTypeComboBox.setBounds(50, 100, 100, 50);
-    myBypassToggleButton.setBounds(50, 150, 200, 50);
-    myLfoDepthSlider.setBounds(50, 200, 100, 100);
-    myTitleLabel.setBounds(200, 0, 100, 50);
+    myCutoffSlider.setBounds(50, 80, 350, 50);
+    myResonanceSlider.setBounds(0, 80, 50, 150);
+    myTypeComboBox.setBounds(50, 140, 100, 50);
+    myBypassToggleButton.setBounds(300, 40, 200, 50);
+    myLfoDepthSlider.setBounds(300, 130, 100, 100);
+    myTitleLabel.setBounds(100, 0, 200, 50);
 }
