@@ -5,4 +5,4 @@ that can be found [here](https://jucestepbystep.wordpress.com/). The first of ma
 My final version looks like this:
 ![alt text][pluginGui]
 
-[pluginGui]: https://github.com/JeanNSHUTI/First-JUCE-StateVariableTPTFilter-plugin/tree/master/Images/plugin-gui.jpg "Basic GUI made with JUCE"
+[pluginGui]: https://github.com/JeanNSHUTI/First-JUCE-StateVariableTPTFilter-plugin/blob/master/Images/plugin-gui.jpg "Basic GUI made with JUCE"
